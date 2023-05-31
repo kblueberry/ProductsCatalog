@@ -1,0 +1,29 @@
+.widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  flex: 1 0 180px;
+  position: relative;
+
+  &:hover > .link_to_details {
+    display: inline-block;
+  }
+
+  .link_to_details {
+    position: absolute;
+    bottom: 5.5em;
+    left: 1.7em;
+    display: none;
+  }
+
+  .product-image {
+    &:hover:before {}
+  }
+
+  .available_count_marker {
+    width: 9px;
+    height: 9px;
+  }
+}

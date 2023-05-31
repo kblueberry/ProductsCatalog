@@ -1,0 +1,38 @@
+@import "vars";
+
+.form-control-custom {
+  border: 1px solid $main_form_control_color;
+
+  &:focus {
+    border-color: $form_control_focused_border;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem $form-control_focused_shadow;
+  }
+}
+
+.submit-action {
+  background-color: $main_form_control_color;
+  color: white;
+  padding: 9px 0;
+}
+
+.range-track-custom::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 22px;
+  border-radius: 3px;
+  background: $main_form_control_color;
+  cursor: pointer;
+  margin-top: -14px;
+  box-shadow: 1px 1px 1px $main_form_control_color;
+}
+
+.range-track-custom::-webkit-slider-runnable-track  {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: #ffffff;
+  border-radius: 1.3px;
+  border: .8px solid $main_form_control_color;
+}

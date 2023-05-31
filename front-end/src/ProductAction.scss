@@ -1,0 +1,18 @@
+.placement {
+  position: absolute;
+  top: 4.8em;
+  right: -6em;
+  transform: translate(-50%, -50%);
+
+  .heart {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+
+    &.is-active {
+      svg {
+        fill: red;
+      }
+    }
+  }
+}

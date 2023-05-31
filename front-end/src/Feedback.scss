@@ -1,0 +1,30 @@
+@import "vars";
+
+.feedback {
+  .feedback-date {
+    font-size: $medium_size;
+  }
+
+  .rated {
+    fill: $cyan-800;
+  }
+
+  .unrated {
+    stroke: $cyan-800;
+    fill: transparent;
+  }
+
+  .underline {
+    margin-top: 24px;
+    height: 2px;
+    background-color: $gray-300;
+  }
+
+  .load_more_small {
+    font-size: $small_size;
+  }
+
+  load_more_medium {
+    font-size: $medium_size;
+  }
+}

@@ -1,0 +1,15 @@
+@import "bootstrap/scss/bootstrap";
+
+//font-settings
+$main_font_family: 'circular';
+$page_heading_font_family: Tahoma;
+$large_heading: 28px;
+$standard_size: 14px;
+$medium_size: 13px;
+$small_size: 12px;
+
+//colors
+$sub_heading_color: $gray-600;
+$main_form_control_color: $cyan-800;
+$form_control_focused_border: #17a5c2;
+$form-control_focused_shadow: rgba(23, 165, 194, 0.35);
