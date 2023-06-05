@@ -1,4 +1,4 @@
-import MainContent from "./MainContent";
+import MainContent from "./products-page/MainContent";
 
 function App() {
   return <>

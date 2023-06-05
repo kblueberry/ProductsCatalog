@@ -5,7 +5,7 @@ export const ActionNames = {
   compareProduct: "Compare",
   likeAction: "Like",
   goToDetails: "Open details",
-  backToList: "Back to products list",
+  linkTo: "Go to ",
   postReview: "Post review",
   postingReviewInPending: "Posting a review ..."
 }

@@ -5,7 +5,7 @@ import {
   createBrowserRouter,
   RouterProvider
 } from "react-router-dom";
-import ProductReviews from "./ProductReviews";
+import ProductReviews from "./feedback-page/ProductReviews";
 import './index.scss';
 
 const router = createBrowserRouter([

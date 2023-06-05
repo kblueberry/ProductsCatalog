@@ -1,3 +1,5 @@
+@import "./src/vars";
+
 .placement {
   position: absolute;
   top: 4.8em;
@@ -15,4 +17,12 @@
       }
     }
   }
+}
+
+.load_more_small {
+  font-size: $small_size;
+}
+
+.load_more_medium {
+  font-size: $medium_size;
 }

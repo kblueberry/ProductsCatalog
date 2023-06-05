@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Products from "./Products";
-import { ProductItem } from "../mock-tool/Product";
+import { ProductItem } from "../../mock-tool/Product";
 
 export default function MainContent() {
   const [products, setProducts] = useState<Array<ProductItem>>([]);

@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useForm, UseFormRegister, Path, SubmitHandler } from "react-hook-form";
+import { Path, SubmitHandler, useForm, UseFormRegister } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import "./FeedbackForm.scss";
-import { ActionNames, ComponentConstants, LeaveReviewForm } from "../mock-tool/ConstantsConfig";
-import { Review } from "../mock-tool/Review";
+import { ComponentConstants, LeaveReviewForm } from "../../mock-tool/ConstantsConfig";
+import { Review } from "../../mock-tool/Review";
+import { SubmitForm } from "../actions/AppActions";
 
 const schema = yup.object({
   comment: yup.string().required(),
@@ -114,11 +115,7 @@ export default function FeedbackForm({ productId }: { productId: number }) {
         {LeaveReviewForm.saveDetails}
       </label>
     </div>
-    {!isPending ? <button type="submit" className="btn-lg fs-5 rounded-pill w-25 submit-action">
-      {ActionNames.postReview}
-    </button> : <button className="btn-lg fs-5 rounded-pill w-25 submit-action" disabled>
-      {ActionNames.postingReviewInPending}
-    </button>}
+    <SubmitForm isPending={isPending}/>
   </form>
 }
 

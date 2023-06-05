@@ -1,22 +1,17 @@
 import './ProductWidget.scss';
-import ProductAction from "./ProductAction";
-import { Link } from "react-router-dom";
-import { ActionNames } from "../mock-tool/ConstantsConfig";
-import { ProductItem } from "../mock-tool/Product";
+import { CheckBoxAction, Like, LinkButton } from "../actions/AppActions";
+import { ProductItem } from "../../mock-tool/Product";
 
 export default function ProductWidget({ item }: { item: ProductItem }) {
   return <div className="widget">
     <p className="link_to_details">
-      <Link className="link-offset-2 fs-3 text-start link-underline-light text-light"
-            to={`/product/${item.id}/reviews`}>
-          {ActionNames.goToDetails}
-      </Link>
+      <LinkButton linkTo={`/product/${item.id}/reviews`} />
     </p>
     <img className="w-100 h-100 py-3 product-image"
          src={item.productView}
          alt={item.productName}>
     </img>
-    <ProductAction actionName={ActionNames.likeAction}/>
+    <Like/>
     <div className="d-flex flex-column w-100 mb-2">
       <div className="d-flex flex-row flex-wrap justify-content-between">
         <ProductDetails value={item.productName}
@@ -33,7 +28,7 @@ export default function ProductWidget({ item }: { item: ProductItem }) {
         <ProductDetails value={item.availabilityQmCount}
                         isAvailable={true}
                         setClass="detail_label_small"/>
-        <ProductAction actionName={ActionNames.compareProduct}/>
+        <CheckBoxAction/>
       </div>
     </div>
   </div>

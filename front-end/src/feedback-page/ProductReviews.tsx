@@ -1,10 +1,10 @@
-import Feedback, { Action } from "./Feedback";
+import Feedback from "./Feedback";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LeaveReview from "./LeaveReview";
-import BackButton from "./BackButton";
-import { ActionNames, ComponentConstants } from "../mock-tool/ConstantsConfig";
-import { Review } from "../mock-tool/Review";
+import { ActionNames, ComponentConstants } from "../../mock-tool/ConstantsConfig";
+import { Review } from "../../mock-tool/Review";
+import { LinkButton, ToggleButton } from "../actions/AppActions";
 
 export default function ProductReviews() {
   const [next, setNext] = useState<number>(ComponentConstants.initialFeedbacksCount);
@@ -35,12 +35,12 @@ export default function ProductReviews() {
   }, []);
 
   return <div className="mx-auto mt-5 mb-2 w-75">
-    <BackButton/>
+    <LinkButton linkTo='/' />
     {productReviews.slice(0, next).map((review) => (
         <Feedback key={review.id} review={review}/>
     ))}
 
-    <Action actionName={actionName} isToggled={toggleReviewsCount}/>
+    <ToggleButton isToggled={toggleReviewsCount} actionName={actionName}/>
     <LeaveReview productId={id}/>
   </div>
 }

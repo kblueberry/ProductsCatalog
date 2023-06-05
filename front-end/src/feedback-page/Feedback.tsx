@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./Feedback.scss";
-import { Review } from "../mock-tool/Review";
-import { ActionNames, ComponentConstants } from "../mock-tool/ConstantsConfig";
+import { Review } from "../../mock-tool/Review";
+import { ActionNames, ComponentConstants } from "../../mock-tool/ConstantsConfig";
+import { ToggleButton } from "../actions/AppActions";
 
 export default function Feedback({ review }: { review: Review }) {
   const [actionName, setActionName] = useState<string>(ActionNames.showFullText);
@@ -30,7 +31,7 @@ export default function Feedback({ review }: { review: Review }) {
         {review.comment.slice(0, commentSize)}
       </div>
       {review.comment.length >= ComponentConstants.initialCommentSize
-          && <Action actionName={actionName} isToggled={toggleHeight}/>}
+          && <ToggleButton isToggled={toggleHeight} actionName={actionName}/>}
     </div>
     <div className="underline"></div>
   </div>
@@ -42,12 +43,4 @@ export function Star({ cssClass }: { cssClass: string }) {
     <path className={cssClass}
           d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
   </svg>
-}
-
-export function Action({ actionName, isToggled }: { actionName: string, isToggled: any }) {
-  let classNames = 'btn text-decoration-underline text-uppercase fw-bold p-0 ';
-  classNames += actionName === ActionNames.readAllReviews ? 'load_more_medium' : 'load_more_small';
-
-  return <button className={classNames}
-                 onClick={() => isToggled()}>{actionName}</button>
 }
