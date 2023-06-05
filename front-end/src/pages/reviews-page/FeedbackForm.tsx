@@ -3,9 +3,9 @@ import { Path, SubmitHandler, useForm, UseFormRegister } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import "./FeedbackForm.scss";
-import { ComponentConstants, LeaveReviewForm } from "../../mock-tool/ConstantsConfig";
-import { Review } from "../../mock-tool/Review";
-import { SubmitForm } from "../actions/AppActions";
+import { ComponentConstants, LeaveReviewForm } from "../../../mock-tool/ConstantsConfig";
+import { Review } from "../../../mock-tool/Review";
+import { SubmitForm } from "../../actions/AppActions";
 
 const schema = yup.object({
   comment: yup.string().required(),

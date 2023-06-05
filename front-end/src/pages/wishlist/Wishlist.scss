@@ -1,0 +1,26 @@
+@import "../../vars.scss";
+
+p, h5 {
+  margin-bottom: 0;
+}
+
+.product_row {
+  //border: 1px solid $sub_heading_color;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .product_name {
+    flex-basis: 75%;
+  }
+
+  .product_price {
+    flex-basis: 15%;
+  }
+
+  .product_remove {
+    flex-basis: 5%;
+    fill: red;
+  }
+}

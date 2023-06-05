@@ -2,18 +2,24 @@
 
 .placement {
   position: absolute;
-  top: 4.8em;
-  right: -6em;
-  transform: translate(-50%, -50%);
+  top: 2.5em;
+  right: -3em;
 
   .heart {
     width: 100px;
     height: 100px;
     cursor: pointer;
 
-    &.is-active {
-      svg {
-        fill: red;
+    svg {
+      &.not_added_to_wishlist {
+        fill: transparent;
+        stroke: $black;
+        stroke-width: 1.5px;
+      }
+
+      &.added_to_wishlist {
+        fill: $red-500;
+        stroke: none;
       }
     }
   }

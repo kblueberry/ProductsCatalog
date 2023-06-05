@@ -1,9 +1,9 @@
 import './ProductWidget.scss';
-import { CheckBoxAction, Like, LinkButton } from "../actions/AppActions";
-import { ProductItem } from "../../mock-tool/Product";
+import { CheckBoxAction, Like, LinkButton } from "../../actions/AppActions";
+import { ProductItem } from "../../../mock-tool/Product";
 
 export default function ProductWidget({ item }: { item: ProductItem }) {
-  return <div className="widget">
+  return <div className="widget p-2">
     <p className="link_to_details">
       <LinkButton linkTo={`/product/${item.id}/reviews`} />
     </p>

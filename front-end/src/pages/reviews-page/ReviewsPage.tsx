@@ -2,11 +2,11 @@ import Feedback from "./Feedback";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LeaveReview from "./LeaveReview";
-import { ActionNames, ComponentConstants } from "../../mock-tool/ConstantsConfig";
-import { Review } from "../../mock-tool/Review";
-import { LinkButton, ToggleButton } from "../actions/AppActions";
+import { ActionNames, ComponentConstants } from "../../../mock-tool/ConstantsConfig";
+import { Review } from "../../../mock-tool/Review";
+import { LinkButton, ToggleButton } from "../../actions/AppActions";
 
-export default function ProductReviews() {
+export default function ReviewsPage() {
   const [next, setNext] = useState<number>(ComponentConstants.initialFeedbacksCount);
   const [actionName, setActionName] = useState<string>(ActionNames.readAllReviews);
   const [productReviews, setProductReviews] = useState<Array<Review>>([]);

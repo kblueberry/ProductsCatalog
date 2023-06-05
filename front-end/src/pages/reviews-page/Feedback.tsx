@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./Feedback.scss";
-import { Review } from "../../mock-tool/Review";
-import { ActionNames, ComponentConstants } from "../../mock-tool/ConstantsConfig";
-import { ToggleButton } from "../actions/AppActions";
+import { Review } from "../../../mock-tool/Review";
+import { ActionNames, ComponentConstants } from "../../../mock-tool/ConstantsConfig";
+import { ToggleButton } from "../../actions/AppActions";
 
 export default function Feedback({ review }: { review: Review }) {
   const [actionName, setActionName] = useState<string>(ActionNames.showFullText);

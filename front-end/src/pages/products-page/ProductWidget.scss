@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   border: 1px solid black;
-  flex: 1 0 180px;
+  flex: 1 0 26%;
   position: relative;
 
   &:hover > .link_to_details {
@@ -13,7 +13,7 @@
 
   .link_to_details {
     position: absolute;
-    bottom: 5.5em;
+    bottom: 6.5em;
     left: 1.7em;
     display: none;
   }
