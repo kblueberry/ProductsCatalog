@@ -5,7 +5,7 @@ import { ProductItem } from "../../../mock-tool/Product";
 export default function ProductWidget({ item }: { item: ProductItem }) {
   return <div className="widget p-2">
     <p className="link_to_details">
-      <LinkButton linkTo={`/product/${item.id}/reviews`} />
+      <LinkButton linkTo={`/product/${item._id}/reviews`} />
     </p>
     <img className="w-100 h-100 py-3 product-image"
          src={item.productView}

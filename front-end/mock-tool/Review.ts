@@ -5,9 +5,9 @@ export class Review {
     this.comment = comment;
     this.productId = productId;
   }
-  id: number;
+  _id: number;
   author: string;
-  date: string = new Date().toDateString();
+  date: Date;
   rate: number;
   comment: string;
   productId: number;

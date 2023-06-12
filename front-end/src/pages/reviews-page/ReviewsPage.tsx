@@ -23,7 +23,7 @@ export default function ReviewsPage() {
   };
 
   const fetchProductInfo = () => {
-    fetch(`http://localhost:3000/reviews?productId=${id}`)
+    fetch(`http://localhost:3000/reviews/${id}`)
         .then(res => res.json())
         .then((reviews: Array<Review>) => {
           setProductReviews(reviews);
@@ -37,10 +37,11 @@ export default function ReviewsPage() {
   return <div className="mx-auto mt-5 mb-2 w-75">
     <LinkButton linkTo='/' />
     {productReviews.slice(0, next).map((review) => (
-        <Feedback key={review.id} review={review}/>
+        <Feedback key={review._id} review={review}/>
     ))}
 
-    <ToggleButton isToggled={toggleReviewsCount} actionName={actionName}/>
+    {!!productReviews.length &&
+        <ToggleButton isToggled={toggleReviewsCount} actionName={actionName}/>}
     <LeaveReview productId={id}/>
   </div>
 }

@@ -42,7 +42,7 @@ export default function FeedbackForm({ productId }: { productId: number }) {
     const review = new Review(data.name, data.rate, data.comment, productId);
     setIsPending(true);
 
-    fetch(`http://localhost:3000/reviews`, {
+    fetch(`http://localhost:3000/reviews/${productId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(review)
