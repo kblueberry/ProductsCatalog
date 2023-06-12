@@ -13,7 +13,7 @@ export default function ProductsPage() {
 
   useEffect(() => {
     fetchProducts();
-  });
+  }, []);
 
   return <div className="container d-flex flex-column justify-content-start align-items-center">
     <h5 className="h5 text-secondary fs-6">The innovation leader in vinyl floor</h5>
