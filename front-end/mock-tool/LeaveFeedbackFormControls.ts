@@ -10,12 +10,12 @@ export const LeaveReviewForm = {
 }
 
 export enum LeaveFeedbackFormControls {
-  Comment = "comment",
-  Name = "name",
-  Email = "email",
-  Phone = "phone",
-  Rate = "rate",
-  SaveDetails = "saveDetails"
+  Comment = "Comment",
+  Name = "Name",
+  Email = "Email",
+  Phone = "Phone",
+  Rate = "Rate",
+  SaveDetails = "SaveDetails"
 }
 
 export enum LeaveFeedbackFormControlsTypes {
@@ -23,3 +23,9 @@ export enum LeaveFeedbackFormControlsTypes {
   Checkbox = "checkbox",
   Range = "range"
 }
+
+export const LeaveFeedbackControls = [
+  { label: LeaveFeedbackFormControls.Name, required: true, containerClasses: "mb-3 me-3 flex-input-container" },
+  { label: LeaveFeedbackFormControls.Email, required: true, containerClasses: "mb-3 flex-input-container" },
+  { label: LeaveFeedbackFormControls.Phone, required: false, containerClasses: "mb-3 w-100" }
+]

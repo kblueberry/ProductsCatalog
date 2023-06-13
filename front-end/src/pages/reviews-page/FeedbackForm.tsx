@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Path, SubmitHandler, useForm, useFormContext, UseFormRegister } from "react-hook-form";
+import { Path, SubmitHandler, useForm, UseFormRegister } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import "./FeedbackForm.scss";
@@ -7,6 +7,7 @@ import { ComponentConstants } from "../../../mock-tool/ConstantsConfig";
 import { Review } from "../../../mock-tool/Review";
 import { SubmitForm } from "../../actions/AppActions";
 import {
+  LeaveFeedbackControls,
   LeaveFeedbackFormControls,
   LeaveFeedbackFormControlsTypes,
   LeaveReviewForm
@@ -32,7 +33,6 @@ type FormControls = {
 
 type InputProps = {
   label: Path<FormControls>;
-  placeholder: string;
   register: UseFormRegister<FormControls>;
   required: boolean;
 }
@@ -61,44 +61,22 @@ export default function FeedbackForm({ productId }: { productId: number }) {
   return <form className="my-3 needs-validation"
                onSubmit={handleSubmit(postReview)}>
     <div className="mb-3">
-      <textarea {...register("comment")}
-                className="form-control-custom w-100 p-2"
-                placeholder={LeaveReviewForm.placeholders.comment}></textarea>
+      <Input label={LeaveFeedbackFormControls.Comment} register={register} required={true}></Input>
       {errors.comment && <p className="text-danger">{errors.comment.message}</p>}
     </div>
-    <div className="mb-3 d-flex justify-content-lg-between">
-      <div className="me-3 flex-md-fill">
-        <Input type={LeaveFeedbackFormControlsTypes.Text}
-               label={LeaveFeedbackFormControls.Name}
-               placeholder={LeaveReviewForm.placeholders.name}
-               register={register}
-               required={true}/>
-        {errors.name && <p className="text-danger">{errors.name.message}</p>}
-      </div>
-
-      <div className="flex-md-fill">
-        <Input type={LeaveFeedbackFormControlsTypes.Text}
-               label={LeaveFeedbackFormControls.Email}
-               placeholder={LeaveReviewForm.placeholders.email}
-               register={register}
-               required={true}/>
-        {errors.email && <p className="text-danger">{errors.email.message}</p>}
-      </div>
-    </div>
-    <div className="mb-3">
-      <Input type={LeaveFeedbackFormControlsTypes.Text}
-             label={LeaveFeedbackFormControls.Phone}
-             placeholder={LeaveReviewForm.placeholders.phone}
-             register={register}
-             required={false}/>
+    <div className="mb-3 d-flex justify-content-lg-between flex-wrap">
+      {LeaveFeedbackControls.map((control) => (
+          <div className={control.containerClasses}>
+            <Input label={control.label} register={register} required={control.required}></Input>
+            {errors.name
+                && control.label !== LeaveFeedbackFormControls.Phone
+                && <p className="text-danger">{errors.name.message}</p>}
+          </div>
+      ))}
     </div>
     <RangeInput register={register}/>
     <div className="mb-3">
-      <input {...register(LeaveFeedbackFormControls.SaveDetails)}
-             type={LeaveFeedbackFormControlsTypes.Checkbox}
-             className="form-check-input"
-             id="exampleCheck1">
-      </input>
+      <Input label={LeaveFeedbackFormControls.SaveDetails} register={register} required={false}></Input>
       <label className="form-check-label ml-2" htmlFor="exampleCheck1">
         {LeaveReviewForm.saveDetails}
       </label>
@@ -107,12 +85,26 @@ export default function FeedbackForm({ productId }: { productId: number }) {
   </form>
 }
 
-function Input({ label, placeholder, register, required }: InputProps) {
-  return <input {...register(label, { required })}
-                type="text"
-                className="form-control-custom w-100 p-2"
-                placeholder={placeholder}></input>
-
+function Input({ label, register, required }: InputProps) {
+  switch (label) {
+    case LeaveFeedbackFormControls.Name:
+    case LeaveFeedbackFormControls.Email:
+    case LeaveFeedbackFormControls.Phone:
+      return <input {...register(label, { required })}
+                    type="text"
+                    className="form-control-custom w-100 p-2"
+                    placeholder={label}></input>
+    case LeaveFeedbackFormControls.Comment:
+      return <textarea {...register(label)}
+                       className="form-control-custom w-100 p-2"
+                       placeholder={LeaveFeedbackFormControls.Comment}></textarea>
+    default:
+      return <input {...register(LeaveFeedbackFormControls.SaveDetails)}
+                    type={LeaveFeedbackFormControlsTypes.Checkbox}
+                    className="form-check-input"
+                    id="exampleCheck1">
+      </input>
+  }
 }
 
 function RangeInput({ register }: { register: UseFormRegister<FormControls> }) {
