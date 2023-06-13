@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { Path, SubmitHandler, useForm, UseFormRegister } from "react-hook-form";
+import { Path, SubmitHandler, useForm, useFormContext, UseFormRegister } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import "./FeedbackForm.scss";
-import { ComponentConstants, LeaveReviewForm } from "../../../mock-tool/ConstantsConfig";
+import { ComponentConstants } from "../../../mock-tool/ConstantsConfig";
 import { Review } from "../../../mock-tool/Review";
 import { SubmitForm } from "../../actions/AppActions";
+import {
+  LeaveFeedbackFormControls,
+  LeaveFeedbackFormControlsTypes,
+  LeaveReviewForm
+} from "../../../mock-tool/LeaveFeedbackFormControls";
 
 const schema = yup.object({
   comment: yup.string().required(),
@@ -63,8 +68,8 @@ export default function FeedbackForm({ productId }: { productId: number }) {
     </div>
     <div className="mb-3 d-flex justify-content-lg-between">
       <div className="me-3 flex-md-fill">
-        <Input type="text"
-               label="name"
+        <Input type={LeaveFeedbackFormControlsTypes.Text}
+               label={LeaveFeedbackFormControls.Name}
                placeholder={LeaveReviewForm.placeholders.name}
                register={register}
                required={true}/>
@@ -72,8 +77,8 @@ export default function FeedbackForm({ productId }: { productId: number }) {
       </div>
 
       <div className="flex-md-fill">
-        <Input type="text"
-               label="email"
+        <Input type={LeaveFeedbackFormControlsTypes.Text}
+               label={LeaveFeedbackFormControls.Email}
                placeholder={LeaveReviewForm.placeholders.email}
                register={register}
                required={true}/>
@@ -81,33 +86,16 @@ export default function FeedbackForm({ productId }: { productId: number }) {
       </div>
     </div>
     <div className="mb-3">
-      <Input type="text"
-             label="phone"
+      <Input type={LeaveFeedbackFormControlsTypes.Text}
+             label={LeaveFeedbackFormControls.Phone}
              placeholder={LeaveReviewForm.placeholders.phone}
              register={register}
              required={false}/>
     </div>
+    <RangeInput register={register}/>
     <div className="mb-3">
-      <label htmlFor="customRange1" className="form-label">
-        {LeaveReviewForm.rateProduct}
-      </label>
-      <div className="w-50">
-        <input {...register("rate")}
-               type="range"
-               list="rate_values"
-               min="1" max="5"
-               className="form-range range-track-custom"
-               id="customRange1"/>
-        <datalist id="rate_values" className="w-100 d-flex flex-row justify-content-between">
-          {[...Array(ComponentConstants.productMaxRating).keys()].map((el) => (
-              <option key={el} value={el + 1} label={el + 1}/>
-          ))}
-        </datalist>
-      </div>
-    </div>
-    <div className="mb-3">
-      <input {...register("saveDetails")}
-             type="checkbox"
+      <input {...register(LeaveFeedbackFormControls.SaveDetails)}
+             type={LeaveFeedbackFormControlsTypes.Checkbox}
              className="form-check-input"
              id="exampleCheck1">
       </input>
@@ -125,4 +113,25 @@ function Input({ label, placeholder, register, required }: InputProps) {
                 className="form-control-custom w-100 p-2"
                 placeholder={placeholder}></input>
 
+}
+
+function RangeInput({ register }: { register: UseFormRegister<FormControls> }) {
+  return <div className="mb-3">
+    <label htmlFor="customRange1" className="form-label">
+      {LeaveReviewForm.rateProduct}
+    </label>
+    <div className="w-50">
+      <input {...register(LeaveFeedbackFormControls.Rate)}
+             type={LeaveFeedbackFormControlsTypes.Range}
+             list="rate_values"
+             min="1" max="5"
+             className="form-range range-track-custom"
+             id="customRange1"/>
+      <datalist id="rate_values" className="w-100 d-flex flex-row justify-content-between">
+        {[...Array(ComponentConstants.productMaxRating).keys()].map((el) => (
+            <option key={el} value={el + 1} label={el + 1}/>
+        ))}
+      </datalist>
+    </div>
+  </div>
 }

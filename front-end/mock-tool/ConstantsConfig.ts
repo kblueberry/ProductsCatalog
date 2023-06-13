@@ -15,14 +15,3 @@ export const ComponentConstants = {
   initialCommentSize: 250,
   initialFeedbacksCount: 1,
 }
-
-export const LeaveReviewForm = {
-  placeholders: {
-    comment: "Comment",
-    name: "Name",
-    email: "Email",
-    phone: "Phone (optional)"
-  },
-  saveDetails: "Save my name, email and website in this browser for the next time I comment",
-  rateProduct: "Rate this product"
-}
