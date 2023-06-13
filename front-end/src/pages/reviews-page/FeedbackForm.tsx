@@ -1,16 +1,13 @@
 import { useState } from "react";
-import { Path, SubmitHandler, useForm, UseFormRegister } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import "./FeedbackForm.scss";
-import { ComponentConstants } from "../../../mock-tool/ConstantsConfig";
 import { Review } from "../../../mock-tool/Review";
 import { SubmitForm } from "../../actions/AppActions";
-import {
-  FormControls,
-  LeaveReviewFormControls,
-  LeaveReviewForm
-} from "../../../mock-tool/LeaveFeedbackFormControls";
+import { FormControls, LeaveReviewForm, LeaveReviewFormControls } from "../../../mock-tool/LeaveFeedbackFormControls";
+import RangeInput from "./RangeInput";
+import Input from "./Input";
 
 const schema = yup.object({
   comment: yup.string().required(),
@@ -20,12 +17,6 @@ const schema = yup.object({
   rate: yup.number().required(),
   saveDetails: yup.boolean()
 }).required();
-
-type InputProps = {
-  label: Path<FormControls>;
-  register: UseFormRegister<FormControls>;
-  required: boolean;
-}
 
 export default function FeedbackForm({ productId }: { productId: number }) {
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -75,45 +66,4 @@ export default function FeedbackForm({ productId }: { productId: number }) {
   </form>
 }
 
-function Input({ label, register, required }: InputProps) {
-  switch (label) {
-    case LeaveReviewForm.placeholders.name:
-    case LeaveReviewForm.placeholders.email:
-    case LeaveReviewForm.placeholders.phone:
-      return <input {...register(label, { required })}
-                    type={LeaveReviewForm.inputTypes.text}
-                    className="form-control-custom w-100 p-2"
-                    placeholder={label}></input>
-    case LeaveReviewForm.placeholders.comment:
-      return <textarea {...register(label)}
-                       className="form-control-custom w-100 p-2"
-                       placeholder={LeaveReviewForm.placeholders.comment}></textarea>
-    default:
-      return <input {...register(LeaveReviewForm.placeholders.saveDetails)}
-                    type={LeaveReviewForm.inputTypes.checkBox}
-                    className="form-check-input"
-                    id="exampleCheck1">
-      </input>
-  }
-}
 
-function RangeInput({ register }: { register: UseFormRegister<FormControls> }) {
-  return <div className="mb-3">
-    <label htmlFor="customRange1" className="form-label">
-      {LeaveReviewForm.labels.rateProduct}
-    </label>
-    <div className="w-50">
-      <input {...register(LeaveReviewForm.placeholders.rate)}
-             type={LeaveReviewForm.inputTypes.range}
-             list="rate_values"
-             min="1" max="5"
-             className="form-range range-track-custom"
-             id="customRange1"/>
-      <datalist id="rate_values" className="w-100 d-flex flex-row justify-content-between">
-        {[...Array(ComponentConstants.productMaxRating).keys()].map((el) => (
-            <option key={el} value={el + 1} label={el + 1}/>
-        ))}
-      </datalist>
-    </div>
-  </div>
-}
