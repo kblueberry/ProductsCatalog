@@ -11,7 +11,7 @@ const Routes = [
   },
 ]
 
-export default function Sidebar() {
+export default function Navbar() {
   return <ul className="nav fixed-top bg-secondary justify-content-center">
     {Routes.map((route, index) => (
         <li key={index} className="nav-item m-3">

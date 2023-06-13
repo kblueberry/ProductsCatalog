@@ -4,12 +4,12 @@ import './index.scss';
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import ProductsPage from "./pages/products-page/ProductsPage";
 import ReviewsPage from "./pages/reviews-page/ReviewsPage";
-import Sidebar from "./sidebar/Sidebar";
+import Navbar from "./navbar/Navbar";
 import Wishlist from "./pages/wishlist/Wishlist";
 
 const AppLayout = () => {
   return <>
-    <Sidebar/>
+    <Navbar/>
     <div className="top-indent-container">
       <Outlet></Outlet>
     </div>
