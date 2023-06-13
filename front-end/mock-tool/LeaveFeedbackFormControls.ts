@@ -1,31 +1,34 @@
 export const LeaveReviewForm = {
   placeholders: {
-    comment: "Comment",
-    name: "Name",
-    email: "Email",
-    phone: "Phone (optional)"
+    comment: "comment",
+    name: "name",
+    email: "email",
+    phone: "phone",
+    rate: "rate",
+    saveDetails: "saveDetails"
   },
-  saveDetails: "Save my name, email and website in this browser for the next time I comment",
-  rateProduct: "Rate this product"
+  inputTypes: {
+    text: "text",
+    checkBox: "checkbox",
+    range: "range"
+  },
+  labels: {
+    saveDetails: "Save my name, email and website in this browser for the next time I comment",
+    rateProduct: "Rate this product"
+  }
 }
 
-export enum LeaveFeedbackFormControls {
-  Comment = "Comment",
-  Name = "Name",
-  Email = "Email",
-  Phone = "Phone",
-  Rate = "Rate",
-  SaveDetails = "SaveDetails"
-}
-
-export enum LeaveFeedbackFormControlsTypes {
-  Text = "text",
-  Checkbox = "checkbox",
-  Range = "range"
-}
-
-export const LeaveFeedbackControls = [
-  { label: LeaveFeedbackFormControls.Name, required: true, containerClasses: "mb-3 me-3 flex-input-container" },
-  { label: LeaveFeedbackFormControls.Email, required: true, containerClasses: "mb-3 flex-input-container" },
-  { label: LeaveFeedbackFormControls.Phone, required: false, containerClasses: "mb-3 w-100" }
+export const LeaveReviewFormControls = [
+  { label: LeaveReviewForm.placeholders.name, required: true, containerClasses: "mb-3 me-3 flex-input-container" },
+  { label: LeaveReviewForm.placeholders.email, required: true, containerClasses: "mb-3 flex-input-container" },
+  { label: LeaveReviewForm.placeholders.phone, required: false, containerClasses: "mb-3 w-100" }
 ]
+
+export type FormControls = {
+  comment: string;
+  name: string;
+  email: string;
+  phone: string;
+  rate: number;
+  saveDetails: boolean;
+}

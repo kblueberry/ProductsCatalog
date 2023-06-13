@@ -7,9 +7,8 @@ import { ComponentConstants } from "../../../mock-tool/ConstantsConfig";
 import { Review } from "../../../mock-tool/Review";
 import { SubmitForm } from "../../actions/AppActions";
 import {
-  LeaveFeedbackControls,
-  LeaveFeedbackFormControls,
-  LeaveFeedbackFormControlsTypes,
+  FormControls,
+  LeaveReviewFormControls,
   LeaveReviewForm
 } from "../../../mock-tool/LeaveFeedbackFormControls";
 
@@ -22,15 +21,6 @@ const schema = yup.object({
   saveDetails: yup.boolean()
 }).required();
 
-type FormControls = {
-  comment: string;
-  name: string;
-  email: string;
-  phone: string;
-  rate: number;
-  saveDetails: boolean;
-}
-
 type InputProps = {
   label: Path<FormControls>;
   register: UseFormRegister<FormControls>;
@@ -39,10 +29,10 @@ type InputProps = {
 
 export default function FeedbackForm({ productId }: { productId: number }) {
   const [isPending, setIsPending] = useState<boolean>(false);
-
   const { register, handleSubmit, formState: { errors } } = useForm<FormControls>({
     resolver: yupResolver(schema)
   });
+
   const postReview: SubmitHandler<FormControls> = data => {
     const review = new Review(data.name, data.rate, data.comment, productId);
     setIsPending(true);
@@ -61,24 +51,24 @@ export default function FeedbackForm({ productId }: { productId: number }) {
   return <form className="my-3 needs-validation"
                onSubmit={handleSubmit(postReview)}>
     <div className="mb-3">
-      <Input label={LeaveFeedbackFormControls.Comment} register={register} required={true}></Input>
+      <Input label={LeaveReviewForm.placeholders.comment} register={register} required={true}></Input>
       {errors.comment && <p className="text-danger">{errors.comment.message}</p>}
     </div>
     <div className="mb-3 d-flex justify-content-lg-between flex-wrap">
-      {LeaveFeedbackControls.map((control) => (
+      {LeaveReviewFormControls.map((control) => (
           <div className={control.containerClasses}>
             <Input label={control.label} register={register} required={control.required}></Input>
             {errors.name
-                && control.label !== LeaveFeedbackFormControls.Phone
+                && control.label !== LeaveReviewForm.placeholders.phone
                 && <p className="text-danger">{errors.name.message}</p>}
           </div>
       ))}
     </div>
     <RangeInput register={register}/>
     <div className="mb-3">
-      <Input label={LeaveFeedbackFormControls.SaveDetails} register={register} required={false}></Input>
+      <Input label={LeaveReviewForm.placeholders.saveDetails} register={register} required={false}></Input>
       <label className="form-check-label ml-2" htmlFor="exampleCheck1">
-        {LeaveReviewForm.saveDetails}
+        {LeaveReviewForm.labels.saveDetails}
       </label>
     </div>
     <SubmitForm isPending={isPending}/>
@@ -87,20 +77,20 @@ export default function FeedbackForm({ productId }: { productId: number }) {
 
 function Input({ label, register, required }: InputProps) {
   switch (label) {
-    case LeaveFeedbackFormControls.Name:
-    case LeaveFeedbackFormControls.Email:
-    case LeaveFeedbackFormControls.Phone:
+    case LeaveReviewForm.placeholders.name:
+    case LeaveReviewForm.placeholders.email:
+    case LeaveReviewForm.placeholders.phone:
       return <input {...register(label, { required })}
-                    type="text"
+                    type={LeaveReviewForm.inputTypes.text}
                     className="form-control-custom w-100 p-2"
                     placeholder={label}></input>
-    case LeaveFeedbackFormControls.Comment:
+    case LeaveReviewForm.placeholders.comment:
       return <textarea {...register(label)}
                        className="form-control-custom w-100 p-2"
-                       placeholder={LeaveFeedbackFormControls.Comment}></textarea>
+                       placeholder={LeaveReviewForm.placeholders.comment}></textarea>
     default:
-      return <input {...register(LeaveFeedbackFormControls.SaveDetails)}
-                    type={LeaveFeedbackFormControlsTypes.Checkbox}
+      return <input {...register(LeaveReviewForm.placeholders.saveDetails)}
+                    type={LeaveReviewForm.inputTypes.checkBox}
                     className="form-check-input"
                     id="exampleCheck1">
       </input>
@@ -110,11 +100,11 @@ function Input({ label, register, required }: InputProps) {
 function RangeInput({ register }: { register: UseFormRegister<FormControls> }) {
   return <div className="mb-3">
     <label htmlFor="customRange1" className="form-label">
-      {LeaveReviewForm.rateProduct}
+      {LeaveReviewForm.labels.rateProduct}
     </label>
     <div className="w-50">
-      <input {...register(LeaveFeedbackFormControls.Rate)}
-             type={LeaveFeedbackFormControlsTypes.Range}
+      <input {...register(LeaveReviewForm.placeholders.rate)}
+             type={LeaveReviewForm.inputTypes.range}
              list="rate_values"
              min="1" max="5"
              className="form-range range-track-custom"
