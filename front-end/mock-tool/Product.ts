@@ -7,3 +7,11 @@ export interface ProductItem {
   availabilityQmCount: number;
   inWishlist: boolean;
 }
+
+export class WishlistItem {
+  _id: number;
+  productView: string;
+  productName: string;
+  price: number;
+  inCart: boolean;
+}

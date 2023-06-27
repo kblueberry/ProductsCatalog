@@ -1,45 +1,47 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.scss';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.scss";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import ProductsPage from "./pages/products-page/ProductsPage";
 import ReviewsPage from "./pages/reviews-page/ReviewsPage";
 import Sidebar from "./sidebar/Sidebar";
-import Wishlist from "./pages/wishlist/Wishlist";
+import WishlistPage from "./pages/wishlist/WishlistPage";
 
 const AppLayout = () => {
-  return <>
-    <Sidebar/>
-    <div className="top-indent-container">
-      <Outlet></Outlet>
-    </div>
-  </>
-}
+  return (
+    <>
+      <Sidebar />
+      <div className="top-indent-container">
+        <Outlet></Outlet>
+      </div>
+    </>
+  );
+};
 
 const router = createBrowserRouter([
   {
-    element: <AppLayout/>,
+    element: <AppLayout />,
     children: [
       {
         path: "/",
-        element: <ProductsPage/>
+        element: <ProductsPage />,
       },
       {
         path: "/product/:id/reviews",
-        element: <ReviewsPage/>
+        element: <ReviewsPage />,
       },
       {
         path: "/wishlist",
-        element: <Wishlist/>
+        element: <WishlistPage />,
       },
       {
         path: "/card",
-        element: <></>
-      }
-    ]
+        element: <></>,
+      },
+    ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <RouterProvider router={router}/>
-)
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <RouterProvider router={router} />
+);
