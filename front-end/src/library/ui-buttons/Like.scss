@@ -1,4 +1,4 @@
-@import "./src/vars";
+@import "../../vars";
 
 .placement {
   position: absolute;
@@ -23,12 +23,4 @@
       }
     }
   }
-}
-
-.load_more_small {
-  font-size: $small_size;
-}
-
-.load_more_medium {
-  font-size: $medium_size;
 }

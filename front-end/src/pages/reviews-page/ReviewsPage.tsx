@@ -2,13 +2,27 @@ import Feedback from "./Feedback";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LeaveReview from "./LeaveReview";
-import { ActionNames, ComponentConstants } from "../../../mock-tool/ConstantsConfig";
+import {
+  ActionNames,
+  ComponentConstants,
+} from "../../../mock-tool/ConstantsConfig";
 import { Review } from "../../../mock-tool/Review";
-import { LinkButton, ToggleButton } from "../../actions/AppActions";
+import UILink from "../../library/UILink";
+import { LinkButtonStyles } from "../../../mock-tool/LinkButtonStyles";
+import UiToggle from "../../library/UiToggle";
+import styled from "styled-components";
+
+const StyledToggle = styled(UiToggle)`
+  font-size: 1.2rem;
+`;
 
 export default function ReviewsPage() {
-  const [next, setNext] = useState<number>(ComponentConstants.initialFeedbacksCount);
-  const [actionName, setActionName] = useState<string>(ActionNames.readAllReviews);
+  const [next, setNext] = useState<number>(
+    ComponentConstants.initialFeedbacksCount
+  );
+  const [actionName, setActionName] = useState<string>(
+    ActionNames.readAllReviews
+  );
   const [productReviews, setProductReviews] = useState<Array<Review>>([]);
   const { id } = useParams();
 
@@ -24,24 +38,29 @@ export default function ReviewsPage() {
 
   const fetchProductInfo = () => {
     fetch(`http://localhost:3000/reviews/${id}`)
-        .then(res => res.json())
-        .then((reviews: Array<Review>) => {
-          setProductReviews(reviews);
-        })
-  }
+      .then((res) => res.json())
+      .then((reviews: Array<Review>) => {
+        setProductReviews(reviews);
+      });
+  };
 
   useEffect(() => {
-    fetchProductInfo()
+    fetchProductInfo();
   }, []);
 
-  return <div className="mx-auto mt-5 mb-2 w-75">
-    <LinkButton linkTo='/' />
-    {productReviews.slice(0, next).map((review) => (
-        <Feedback key={review._id} review={review}/>
-    ))}
+  return (
+    <div className="mx-auto mt-5 mb-2 w-75">
+      <UILink pageLink={"/"} fontStyles={LinkButtonStyles.BreadcrumbLink}>
+        {ActionNames.linkTo + "products"}
+      </UILink>
+      {productReviews.slice(0, next).map((review) => (
+        <Feedback key={review._id} review={review} />
+      ))}
 
-    {!!productReviews.length &&
-        <ToggleButton isToggled={toggleReviewsCount} actionName={actionName}/>}
-    <LeaveReview productId={id}/>
-  </div>
+      {!!productReviews.length && (
+        <StyledToggle isToggled={toggleReviewsCount} actionName={actionName} />
+      )}
+      <LeaveReview productId={id} />
+    </div>
+  );
 }
