@@ -1,0 +1,17 @@
+.widget {
+  &:hover > .link_to_details {
+    display: inline-block;
+  }
+
+  .link_to_details {
+    position: absolute;
+    bottom: 10.5em;
+    left: 1.7em;
+    display: none;
+  }
+
+  .available_count_marker {
+    width: 9px;
+    height: 9px;
+  }
+}

@@ -6,20 +6,20 @@
   border: 1px solid black;
   flex: 1 0 26%;
   position: relative;
-
-  &:hover > .link_to_details {
-    display: inline-block;
-  }
-
-  .link_to_details {
-    position: absolute;
-    bottom: 6.5em;
-    left: 1.7em;
-    display: none;
-  }
-
-  .available_count_marker {
-    width: 9px;
-    height: 9px;
-  }
+  //
+  //&:hover > .link_to_details {
+  //  display: inline-block;
+  //}
+  //
+  //.link_to_details {
+  //  position: absolute;
+  //  bottom: 6.5em;
+  //  left: 1.7em;
+  //  display: none;
+  //}
+  //
+  //.available_count_marker {
+  //  width: 9px;
+  //  height: 9px;
+  //}
 }

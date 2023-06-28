@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { WishlistItem } from "../../../mock-tool/Product";
-import AddToCart from "./AddToCart";
-import UiListItemImage from "../../library/UiListItemImage";
 import UiWidget from "../../library/ui-widget/UiWidget";
+import UiList from "../../library/UiList";
+import UiListItemImage from "../../library/UiListItemImage";
+import { UiName } from "../../library/ui-section/UiSection";
+import AddToCart from "./AddToCart";
 
 export default function WishlistPage() {
   const [wishListItems, setWishListItems] = useState<Array<WishlistItem>>([
@@ -21,18 +23,19 @@ export default function WishlistPage() {
   ]);
 
   return (
-    <div className="container d-flex flex-row justify-content-start align-items-center">
-      {wishListItems.map((item, index) => (
-        <UiWidget key={index}>
-          <UiListItemImage
-            imageSrc={item.productView}
-            imageAlt={item.productName}
-          ></UiListItemImage>
-          <b>{item.productName}</b>
-          <p>${item.price}/qm</p>
-          <AddToCart isAdded={item.inCart} />
-        </UiWidget>
-      ))}
+    <div className="container d-flex flex-column justify-content-start align-items-center">
+      <UiList>
+        {wishListItems.map((item, index) => (
+          <UiWidget key={index}>
+            <UiListItemImage
+              imageSrc={item.productView}
+              imageAlt={item.productName}
+            ></UiListItemImage>
+            <UiName item={item} />
+            <AddToCart isAdded={item.inCart} />
+          </UiWidget>
+        ))}
+      </UiList>
     </div>
   );
 }

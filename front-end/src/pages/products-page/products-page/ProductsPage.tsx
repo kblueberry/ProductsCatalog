@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { ProductItem } from "../../../mock-tool/Product";
-import UiList from "../../library/UiList";
-import UiWidget from "../../library/ui-widget/UiWidget";
-import { Like, LinkButton } from "../../actions/AppActions";
-import UiListItemImage from "../../library/UiListItemImage";
-import ProductInfo from "./ProductInfo";
+import { ProductItem } from "../../../../mock-tool/Product";
+import UiList from "../../../library/UiList";
+import UiWidget from "../../../library/ui-widget/UiWidget";
+import { Like, LinkButton } from "../../../actions/AppActions";
+import UiListItemImage from "../../../library/UiListItemImage";
+import ProductDescription from "../ProductDescription";
+import "./ProductsPage.scss";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Array<ProductItem>>([]);
@@ -36,7 +37,7 @@ export default function ProductsPage() {
               imageAlt={product.productName}
             />
             <Like />
-            <ProductInfo product={product} />
+            <ProductDescription product={product} />
           </UiWidget>
         ))}
       </UiList>

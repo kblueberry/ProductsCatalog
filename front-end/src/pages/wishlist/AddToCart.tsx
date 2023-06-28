@@ -1,7 +1,6 @@
-import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { ActionNames } from "../../../mock-tool/ConstantsConfig";
 import { useState } from "react";
+import { RemoveShoppingCart, ShoppingCart } from "@mui/icons-material";
 
 export default function AddToCart({ isAdded }: { isAdded: boolean }) {
   const [isAddedState, setIsAddedState] = useState<boolean>(isAdded);
@@ -13,11 +12,7 @@ export default function AddToCart({ isAdded }: { isAdded: boolean }) {
       }`}
       onClick={() => setIsAddedState(!isAddedState)}
     >
-      {!isAddedState ? (
-        <ShoppingCartIcon></ShoppingCartIcon>
-      ) : (
-        <RemoveShoppingCartIcon />
-      )}
+      {!isAddedState ? <ShoppingCart /> : <RemoveShoppingCart />}
       {!isAddedState ? ActionNames.addToCart : ActionNames.removeFromCart}
     </button>
   );
