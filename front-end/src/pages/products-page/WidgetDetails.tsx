@@ -1,11 +1,6 @@
-import "./ProductWidget.scss";
-import { ReactNode } from "react";
+import "../../library/ui-widget/UiWidget.scss";
 
-export default function ProductWidget({ children }: { children: ReactNode }) {
-  return <div className="widget p-2">{children}</div>;
-}
-
-export function ProductDetails({
+export function WidgetDetails({
   value,
   isAvailable,
   setClass,
