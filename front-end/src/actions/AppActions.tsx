@@ -19,25 +19,3 @@ export function CheckBoxAction() {
     </div>
   );
 }
-
-export function SubmitForm({ isPending }: { isPending: boolean }) {
-  if (!isPending) {
-    return (
-      <button
-        type="submit"
-        className="btn-lg fs-5 rounded-pill w-25 submit-action"
-      >
-        {ActionNames.postReview}
-      </button>
-    );
-  }
-  return (
-    <button
-      type="submit"
-      className="btn-lg fs-5 rounded-pill w-25 submit-action"
-      disabled
-    >
-      {ActionNames.postingReviewInPending}
-    </button>
-  );
-}
