@@ -1,0 +1,26 @@
+@import "./src/vars";
+
+.placement {
+  position: absolute;
+  top: 2.5em;
+  right: -3em;
+
+  .heart {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+
+    svg {
+      &.not_added_to_wishlist {
+        fill: transparent;
+        stroke: $black;
+        stroke-width: 1.5px;
+      }
+
+      &.added_to_wishlist {
+        fill: $red-500;
+        stroke: none;
+      }
+    }
+  }
+}
