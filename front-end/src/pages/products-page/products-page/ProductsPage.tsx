@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { ProductItem } from "../../../../mock-tool/Product";
 import UiList from "../../../library/UiList";
 import UiWidget from "../../../library/ui-widget/UiWidget";
-import { LinkButton } from "../../../actions/AppActions";
 import UiListItemImage from "../../../library/UiListItemImage";
 import ProductDescription from "../ProductDescription";
 import "./ProductsPage.scss";
 import Like from "../../../actions/Like";
+import UILink from "../../../library/UILink";
+import { ActionNames } from "../../../../mock-tool/ConstantsConfig";
+import { LinkButtonStyles } from "../../../actions/LinkButtonStyles";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Array<ProductItem>>([]);
@@ -31,7 +33,12 @@ export default function ProductsPage() {
         {products.map((product) => (
           <UiWidget key={product.productName}>
             <div className="link_to_details">
-              <LinkButton linkTo={`/product/${product._id}/reviews`} />
+              <UILink
+                pageLink={`/product/${product._id}/reviews`}
+                fontStyles={LinkButtonStyles.ImageCoverLink}
+              >
+                {ActionNames.linkTo + "product"}
+              </UILink>
             </div>
             <UiListItemImage
               imageSrc={product.productView}

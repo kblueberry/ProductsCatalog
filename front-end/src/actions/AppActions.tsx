@@ -1,8 +1,5 @@
 import "./AppActions.scss";
 import { ActionNames } from "../../mock-tool/ConstantsConfig";
-import { Link } from "react-router-dom";
-import { ProductItem } from "../../mock-tool/Product";
-import { useState } from "react";
 
 export function CheckBoxAction() {
   return (
@@ -40,32 +37,6 @@ export function ToggleButton({
     <button className={classNames} onClick={() => isToggled()}>
       {actionName}
     </button>
-  );
-}
-
-export function LinkButton({ linkTo }: { linkTo: string }) {
-  const extractPath = (link: string) => {
-    return link.slice(link.lastIndexOf("/") + 1, link.length);
-  };
-
-  const actionName =
-    linkTo === "/"
-      ? ActionNames.linkTo + "products"
-      : ActionNames.linkTo + extractPath(linkTo);
-
-  return (
-    <>
-      <Link
-        to={linkTo}
-        className={
-          linkTo === "/"
-            ? "link-offset-2 text-primary-emphasis"
-            : "link-offset-2 fs-3 ink-underline-light text-light"
-        }
-      >
-        {actionName}
-      </Link>
-    </>
   );
 }
 

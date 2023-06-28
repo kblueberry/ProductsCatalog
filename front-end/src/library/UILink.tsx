@@ -1,25 +1,32 @@
 import { Link } from "react-router-dom";
+import { ReactNode } from "react";
+import { LinkButtonStyles } from "../actions/LinkButtonStyles";
 
 type UILinkProps = {
   pageLink: string;
   fontStyles: number;
-  actionName: string;
+  children: ReactNode;
 };
-
-enum FontStyles {
-  Small = 1,
-  Medium,
-  Large,
-}
 
 export default function UILink({
   pageLink,
   fontStyles,
-  actionName,
+  children,
 }: UILinkProps) {
+  const setLinkStyles = () => {
+    switch (fontStyles) {
+      case LinkButtonStyles.ImageCoverLink:
+        return "fs-3 text-light";
+      case LinkButtonStyles.BreadcrumbLink:
+        return "text-primary-emphasis";
+      default:
+        return "";
+    }
+  };
+
   return (
-    <Link to={pageLink} className={"link-offset-2" + fontStyles}>
-      {actionName}
+    <Link to={pageLink} className={"link-offset-2 " + setLinkStyles()}>
+      {children}
     </Link>
   );
 }
