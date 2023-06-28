@@ -20,26 +20,6 @@ export function CheckBoxAction() {
   );
 }
 
-export function ToggleButton({
-  isToggled,
-  actionName,
-}: {
-  isToggled: any;
-  actionName: string;
-}) {
-  let classNames = "btn text-decoration-underline text-uppercase fw-bold p-0 ";
-  classNames +=
-    actionName === ActionNames.readAllReviews
-      ? "load_more_medium"
-      : "load_more_small";
-
-  return (
-    <button className={classNames} onClick={() => isToggled()}>
-      {actionName}
-    </button>
-  );
-}
-
 export function SubmitForm({ isPending }: { isPending: boolean }) {
   if (!isPending) {
     return (

@@ -7,9 +7,14 @@ import {
   ComponentConstants,
 } from "../../../mock-tool/ConstantsConfig";
 import { Review } from "../../../mock-tool/Review";
-import { ToggleButton } from "../../actions/AppActions";
 import UILink from "../../library/UILink";
 import { LinkButtonStyles } from "../../actions/LinkButtonStyles";
+import UiToggle from "../../library/UiToggle";
+import styled from "styled-components";
+
+const StyledToggle = styled(UiToggle)`
+  font-size: 1.2rem;
+`;
 
 export default function ReviewsPage() {
   const [next, setNext] = useState<number>(
@@ -53,7 +58,7 @@ export default function ReviewsPage() {
       ))}
 
       {!!productReviews.length && (
-        <ToggleButton isToggled={toggleReviewsCount} actionName={actionName} />
+        <StyledToggle isToggled={toggleReviewsCount} actionName={actionName} />
       )}
       <LeaveReview productId={id} />
     </div>
