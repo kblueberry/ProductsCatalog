@@ -1,5 +1,5 @@
 import { DescriptionItemMarkered } from "./DescriptionItemMarkered";
-import { CheckBoxAction } from "../../actions/AppActions";
+import { UiCheckbox } from "../../library/ui-buttons/UiCheckbox";
 import { ProductItem } from "../../../mock-tool/Product";
 import UiSection, { UiName } from "../../library/ui-section/UiSection";
 
@@ -15,7 +15,7 @@ export default function ProductDescription({
         <p>{product.productBrand}</p>
         <UiSection>
           <DescriptionItemMarkered value={product.availabilityQmCount} />
-          <CheckBoxAction />
+          <UiCheckbox />
         </UiSection>
       </div>
     </>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ReactNode } from "react";
-import { LinkButtonStyles } from "../actions/LinkButtonStyles";
+import { LinkButtonStyles } from "../../mock-tool/LinkButtonStyles";
 
 type UILinkProps = {
   pageLink: string;

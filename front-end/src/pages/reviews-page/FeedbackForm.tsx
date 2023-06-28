@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./FeedbackForm.scss";
 import { Review } from "../../../mock-tool/Review";
-import { SubmitForm } from "../../actions/AppActions";
 import {
   FormControls,
   LeaveReviewForm,

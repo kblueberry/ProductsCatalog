@@ -8,7 +8,7 @@ import {
 } from "../../../mock-tool/ConstantsConfig";
 import { Review } from "../../../mock-tool/Review";
 import UILink from "../../library/UILink";
-import { LinkButtonStyles } from "../../actions/LinkButtonStyles";
+import { LinkButtonStyles } from "../../../mock-tool/LinkButtonStyles";
 import UiToggle from "../../library/UiToggle";
 import styled from "styled-components";
 

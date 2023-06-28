@@ -1,7 +1,7 @@
-import "./AppActions.scss";
-import { ActionNames } from "../../mock-tool/ConstantsConfig";
+import "./UiCheckbox.scss";
+import { ActionNames } from "../../../mock-tool/ConstantsConfig";
 
-export function CheckBoxAction() {
+export function UiCheckbox() {
   return (
     <div className="form-check form-check-reverse">
       <input

@@ -1,4 +1,4 @@
-import { ProductItem } from "../../mock-tool/Product";
+import { ProductItem } from "../../../mock-tool/Product";
 import { useState } from "react";
 import "./Like.scss";
 

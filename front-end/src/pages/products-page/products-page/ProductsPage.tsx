@@ -5,10 +5,10 @@ import UiWidget from "../../../library/ui-widget/UiWidget";
 import UiListItemImage from "../../../library/UiListItemImage";
 import ProductDescription from "../ProductDescription";
 import "./ProductsPage.scss";
-import Like from "../../../actions/Like";
+import Like from "../../../library/ui-buttons/Like";
 import UILink from "../../../library/UILink";
 import { ActionNames } from "../../../../mock-tool/ConstantsConfig";
-import { LinkButtonStyles } from "../../../actions/LinkButtonStyles";
+import { LinkButtonStyles } from "../../../../mock-tool/LinkButtonStyles";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Array<ProductItem>>([]);
