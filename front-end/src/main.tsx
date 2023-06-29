@@ -6,6 +6,7 @@ import ProductsPage from "./pages/products-page/products-page/ProductsPage";
 import ReviewsPage from "./pages/reviews-page/ReviewsPage";
 import Sidebar from "./sidebar/Sidebar";
 import WishlistPage from "./pages/wishlist/WishlistPage";
+import CartPage from "./pages/cart-page/CartPage";
 
 const AppLayout = () => {
   return (
@@ -35,8 +36,8 @@ const router = createBrowserRouter([
         element: <WishlistPage />,
       },
       {
-        path: "/card",
-        element: <></>,
+        path: "/shopping-cart",
+        element: <CartPage />,
       },
     ],
   },

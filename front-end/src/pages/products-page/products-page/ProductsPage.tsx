@@ -8,7 +8,7 @@ import "./ProductsPage.scss";
 import Like from "../../../library/ui-buttons/Like";
 import UILink from "../../../library/UILink";
 import { ActionNames } from "../../../../mock-tool/ConstantsConfig";
-import { LinkButtonStyles } from "../../../../mock-tool/LinkButtonStyles";
+import { LinkButtonStyles } from "../../../../mock-tool/enums/LinkButtonStyles";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Array<ProductItem>>([]);
