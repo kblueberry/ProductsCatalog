@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import "./UiSection.scss";
+// import "./UiSection.scss";
 
 export default function UiSection({ children }: { children: ReactNode }) {
   return <div className="container-flex">{children}</div>;

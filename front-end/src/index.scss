@@ -26,3 +26,9 @@ body {
 .top-indent-container {
   margin-top: 7em;
 }
+
+.container-flex {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}

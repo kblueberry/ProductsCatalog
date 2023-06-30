@@ -1,5 +1,13 @@
 import { ReactNode } from "react";
 
-export default function UiList({ children }: { children: ReactNode }) {
-  return <div className="d-flex flex-wrap flex-row mx-auto">{children}</div>;
+export default function UiList({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`container-flex mx-auto ${className}`}>{children}</div>
+  );
 }
