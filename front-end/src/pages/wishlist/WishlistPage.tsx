@@ -3,7 +3,7 @@ import { WishlistItem } from "../../../mock-tool/Product";
 import UiWidget from "../../library/ui-widget/UiWidget";
 import UiList from "../../library/UiList";
 import UiListItemImage from "../../library/UiListItemImage";
-import { UiName } from "../../library/ui-section/UiSection";
+import { UiName } from "../../library/UiSection";
 import AddToCart from "./AddToCart";
 import NoItemsPlaceholder from "../../library/NoItemsPlaceholder";
 import { ItemsPlacement } from "../../../mock-tool/enums/ItemsPlacement";
@@ -28,10 +28,7 @@ export default function WishlistPage() {
             (item, index) =>
               !item.inCart && (
                 <UiWidget key={index}>
-                  <UiListItemImage
-                    imageSrc={item.productView}
-                    imageAlt={item.productName}
-                  ></UiListItemImage>
+                  <UiListItemImage product={item} wishListAction={true} />
                   <UiName item={item} />
                   <AddToCart item={item} />
                 </UiWidget>

@@ -40,11 +40,7 @@ export default function ProductsPage() {
                 {ActionNames.linkTo + "product"}
               </UILink>
             </div>
-            <UiListItemImage
-              imageSrc={product.productView}
-              imageAlt={product.productName}
-            />
-            <Like item={product} />
+            <UiListItemImage product={product} wishListAction={true} />
             <ProductDescription product={product} />
           </UiWidget>
         ))}

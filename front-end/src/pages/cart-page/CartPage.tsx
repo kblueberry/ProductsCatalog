@@ -42,10 +42,7 @@ export default function CartPage() {
         <StyledList>
           {cartItems.map((cartItem) => (
             <StyledWidget key={cartItem._id}>
-              <StyledImage
-                imageSrc={cartItem.productView}
-                imageAlt={cartItem.productName}
-              />
+              <StyledImage product={cartItem} />
               <StyledSpan>{cartItem.productName}</StyledSpan>
               <div className="pe-2">
                 <AddToCart item={cartItem} />

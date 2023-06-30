@@ -1,19 +1,26 @@
 import "./UiListItemImage.scss";
+import Like from "./ui-buttons/Like";
+import { ProductItem } from "../../mock-tool/Product";
+
+type ImageProps = {
+  product: ProductItem;
+  wishListAction?: boolean;
+  className?: string;
+};
 
 export default function UiListItemImage({
-  imageSrc,
-  imageAlt,
+  product,
+  wishListAction = false,
   className = "",
-}: {
-  imageSrc: string;
-  imageAlt: string;
-  className?: string;
-}) {
+}: ImageProps) {
   return (
-    <img
-      className={`image-container py-3 ${className}`}
-      src={imageSrc}
-      alt={imageAlt}
-    ></img>
+    <>
+      <img
+        className={`image-container py-3 ${className}`}
+        src={product.productView}
+        alt={product.productName}
+      ></img>
+      {wishListAction && <Like item={product} />}
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import { DescriptionItemMarkered } from "./DescriptionItemMarkered";
 import { UiCheckbox } from "../../library/ui-buttons/UiCheckbox";
 import { ProductItem } from "../../../mock-tool/Product";
-import UiSection, { UiName } from "../../library/ui-section/UiSection";
+import UiSection, { UiName } from "../../library/UiSection";
 
 export default function ProductDescription({
   product,
