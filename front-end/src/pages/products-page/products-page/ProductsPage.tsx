@@ -1,27 +1,29 @@
-import { useEffect, useState } from "react";
-import { ProductItem } from "../../../../mock-tool/Product";
 import UiList from "../../../library/UiList";
 import UiWidget from "../../../library/ui-widget/UiWidget";
 import UiListItemImage from "../../../library/UiListItemImage";
 import ProductDescription from "../ProductDescription";
 import "./ProductsPage.scss";
-import Like from "../../../library/ui-buttons/Like";
 import UILink from "../../../library/UILink";
 import { ActionNames } from "../../../../mock-tool/ConstantsConfig";
 import { LinkButtonStyles } from "../../../../mock-tool/enums/LinkButtonStyles";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProducts } from "../../../Api";
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState<Array<ProductItem>>([]);
+  const productsQuery = useQuery(["products"], fetchProducts);
 
-  const fetchProducts = () => {
-    fetch("http://localhost:3000/products")
-      .then((res) => res.json())
-      .then((products) => setProducts(products));
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  if (productsQuery.isLoading) {
+    return <h2>Loading...</h2>;
+  }
+  if (productsQuery.isError) {
+    return <h2>There was an error fetching products</h2>;
+  }
+  console.log(
+    "is loading",
+    productsQuery.isLoading,
+    "is fetching",
+    productsQuery.isFetching
+  );
 
   return (
     <div className="container d-flex flex-column justify-content-start align-items-center">
@@ -30,7 +32,7 @@ export default function ProductsPage() {
       </h5>
       <h1 className="h1 display-5 fs-2">Let's Get Started</h1>
       <UiList>
-        {products.map((product) => (
+        {productsQuery.data.map((product) => (
           <UiWidget key={product.productName}>
             <div className="link_to_details">
               <UILink

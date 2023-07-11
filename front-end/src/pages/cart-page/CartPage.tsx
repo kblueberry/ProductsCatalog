@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { ProductItem } from "../../../mock-tool/Product";
 import UiList from "../../library/UiList";
 import UiWidget from "../../library/ui-widget/UiWidget";
 import AddToCart from "../wishlist/AddToCart";
@@ -7,6 +5,8 @@ import NoItemsPlaceholder from "../../library/NoItemsPlaceholder";
 import { ItemsPlacement } from "../../../mock-tool/enums/ItemsPlacement";
 import UiListItemImage from "../../library/UiListItemImage";
 import styled from "styled-components";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProducts } from "../../Api";
 
 const StyledWidget = styled(UiWidget)`
   flex-direction: row;
@@ -28,19 +28,13 @@ const StyledSpan = styled.span`
 `;
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<Array<ProductItem>>([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/products")
-      .then((res) => res.json())
-      .then((products) => setCartItems(products.filter((item) => item.inCart)));
-  }, []);
+  const productsQuery = useQuery(["products"], fetchProducts);
 
   return (
     <div className="container d-flex flex-column justify-content-start align-items-center">
-      {!!cartItems.length ? (
+      {!!productsQuery.data?.length ? (
         <StyledList>
-          {cartItems.map((cartItem) => (
+          {productsQuery.data.map((cartItem) => (
             <StyledWidget key={cartItem._id}>
               <StyledImage product={cartItem} />
               <StyledSpan>{cartItem.productName}</StyledSpan>

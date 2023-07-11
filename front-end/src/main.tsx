@@ -7,6 +7,12 @@ import ReviewsPage from "./pages/reviews-page/ReviewsPage";
 import Sidebar from "./sidebar/Sidebar";
 import WishlistPage from "./pages/wishlist/WishlistPage";
 import CartPage from "./pages/cart-page/CartPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: 30000 } },
+});
 
 const AppLayout = () => {
   return (
@@ -44,5 +50,8 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <RouterProvider router={router} />
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+    <ReactQueryDevtools></ReactQueryDevtools>
+  </QueryClientProvider>
 );
