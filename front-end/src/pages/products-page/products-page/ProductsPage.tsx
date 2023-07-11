@@ -8,22 +8,14 @@ import { ActionNames } from "../../../../mock-tool/ConstantsConfig";
 import { LinkButtonStyles } from "../../../../mock-tool/enums/LinkButtonStyles";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "../../../Api";
+import UiLoadingSpinner from "../../../library/UiLoadingSpinner";
 
 export default function ProductsPage() {
-  const productsQuery = useQuery(["products"], fetchProducts);
+  const { data, isLoading } = useQuery(["products"], fetchProducts);
 
-  if (productsQuery.isLoading) {
-    return <h2>Loading...</h2>;
+  if (isLoading) {
+    return <UiLoadingSpinner />;
   }
-  if (productsQuery.isError) {
-    return <h2>There was an error fetching products</h2>;
-  }
-  console.log(
-    "is loading",
-    productsQuery.isLoading,
-    "is fetching",
-    productsQuery.isFetching
-  );
 
   return (
     <div className="container d-flex flex-column justify-content-start align-items-center">
@@ -32,7 +24,7 @@ export default function ProductsPage() {
       </h5>
       <h1 className="h1 display-5 fs-2">Let's Get Started</h1>
       <UiList>
-        {productsQuery.data.map((product) => (
+        {data.map((product) => (
           <UiWidget key={product.productName}>
             <div className="link_to_details">
               <UILink

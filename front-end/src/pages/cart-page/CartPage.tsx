@@ -7,6 +7,7 @@ import UiListItemImage from "../../library/UiListItemImage";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "../../Api";
+import UiLoadingSpinner from "../../library/UiLoadingSpinner";
 
 const StyledWidget = styled(UiWidget)`
   flex-direction: row;
@@ -30,7 +31,7 @@ const StyledSpan = styled.span`
 export default function CartPage() {
   const { data, isLoading } = useQuery(["products"], fetchProducts);
 
-  if (isLoading) return <h2>Loading...</h2>;
+  if (isLoading) return <UiLoadingSpinner />;
 
   return (
     <div className="container d-flex flex-column justify-content-start align-items-center">

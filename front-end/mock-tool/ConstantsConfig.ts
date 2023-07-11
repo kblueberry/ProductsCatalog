@@ -10,6 +10,7 @@ export const ActionNames = {
   postingReviewInPending: "Posting a review ...",
   addToCart: "Add to cart",
   removeFromCart: "Remove from cart",
+  loadingData: "Loading...",
 };
 
 export const ComponentConstants = {

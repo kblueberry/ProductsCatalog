@@ -7,11 +7,12 @@ import NoItemsPlaceholder from "../../library/NoItemsPlaceholder";
 import { ItemsPlacement } from "../../../mock-tool/enums/ItemsPlacement";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "../../Api";
+import UiLoadingSpinner from "../../library/UiLoadingSpinner";
 
 export default function WishlistPage() {
   const { data, isLoading } = useQuery(["products"], fetchProducts);
 
-  if (isLoading) return <h2>Loading...</h2>;
+  if (isLoading) return <UiLoadingSpinner />;
 
   console.log("isLoading", isLoading, "items", data);
   return (
