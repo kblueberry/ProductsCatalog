@@ -11,10 +11,13 @@ import { fetchProducts } from "../../../Api";
 import UiLoadingSpinner from "../../../library/UiLoadingSpinner";
 
 export default function ProductsPage() {
-  const { data, isLoading } = useQuery(["products"], fetchProducts);
+  const { data, error, isLoading } = useQuery(["products"], fetchProducts);
 
   if (isLoading) {
     return <UiLoadingSpinner />;
+  }
+  if (error) {
+    return <h3>An error occurred: ${error.message}</h3>;
   }
 
   return (

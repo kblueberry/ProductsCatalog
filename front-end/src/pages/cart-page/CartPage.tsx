@@ -29,9 +29,12 @@ const StyledSpan = styled.span`
 `;
 
 export default function CartPage() {
-  const { data, isLoading } = useQuery(["products"], fetchProducts);
+  const { data, error, isLoading } = useQuery(["products"], fetchProducts);
 
   if (isLoading) return <UiLoadingSpinner />;
+  if (error) {
+    return <h3 className="text-center">An error occurred: ${error.message}</h3>;
+  }
 
   return (
     <div className="container d-flex flex-column justify-content-start align-items-center">
