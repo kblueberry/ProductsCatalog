@@ -28,21 +28,25 @@ const StyledSpan = styled.span`
 `;
 
 export default function CartPage() {
-  const productsQuery = useQuery(["products"], fetchProducts);
+  const { data, isLoading } = useQuery(["products"], fetchProducts);
+
+  if (isLoading) return <h2>Loading...</h2>;
 
   return (
     <div className="container d-flex flex-column justify-content-start align-items-center">
-      {!!productsQuery.data?.length ? (
+      {!!data?.filter((item) => item.inCart).length ? (
         <StyledList>
-          {productsQuery.data.map((cartItem) => (
-            <StyledWidget key={cartItem._id}>
-              <StyledImage product={cartItem} />
-              <StyledSpan>{cartItem.productName}</StyledSpan>
-              <div className="pe-2">
-                <AddToCart item={cartItem} />
-              </div>
-            </StyledWidget>
-          ))}
+          {data
+            .filter((item) => item.inCart)
+            .map((cartItem) => (
+              <StyledWidget key={cartItem._id}>
+                <StyledImage product={cartItem} />
+                <StyledSpan>{cartItem.productName}</StyledSpan>
+                <div className="pe-2">
+                  <AddToCart item={cartItem} />
+                </div>
+              </StyledWidget>
+            ))}
         </StyledList>
       ) : (
         <NoItemsPlaceholder itemsPlacement={ItemsPlacement.ShoppingCart} />

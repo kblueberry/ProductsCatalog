@@ -9,22 +9,27 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "../../Api";
 
 export default function WishlistPage() {
-  const productsQuery = useQuery(["products"], fetchProducts);
+  const { data, isLoading } = useQuery(["products"], fetchProducts);
 
+  if (isLoading) return <h2>Loading...</h2>;
+
+  console.log("isLoading", isLoading, "items", data);
   return (
     <div className="container d-flex flex-column justify-content-start align-items-center">
-      {!!productsQuery.data?.length ? (
+      {!!data?.filter((item) => item.inWishList).length ? (
         <UiList>
-          {productsQuery.data?.map(
-            (item, index) =>
-              !item.inCart && (
-                <UiWidget key={index}>
-                  <UiListItemImage product={item} wishListAction={true} />
-                  <UiName item={item} />
-                  <AddToCart item={item} />
-                </UiWidget>
-              )
-          )}
+          {data
+            ?.filter((item) => item.inWishList)
+            .map(
+              (item, index) =>
+                !item.inCart && (
+                  <UiWidget key={index}>
+                    <UiListItemImage product={item} wishListAction={true} />
+                    <UiName item={item} />
+                    <AddToCart item={item} />
+                  </UiWidget>
+                )
+            )}
         </UiList>
       ) : (
         <NoItemsPlaceholder itemsPlacement={ItemsPlacement.Wishlist} />
