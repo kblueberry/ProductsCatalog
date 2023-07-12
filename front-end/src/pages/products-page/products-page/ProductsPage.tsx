@@ -9,6 +9,7 @@ import { LinkButtonStyles } from "../../../../mock-tool/enums/LinkButtonStyles";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "../../../Api";
 import UiLoadingSpinner from "../../../library/UiLoadingSpinner";
+import { UiHttpError } from "../../../library/UiHttpError";
 
 export default function ProductsPage() {
   const { data, error, isLoading } = useQuery(["products"], fetchProducts);
@@ -17,7 +18,7 @@ export default function ProductsPage() {
     return <UiLoadingSpinner />;
   }
   if (error) {
-    return <h3>An error occurred: ${error.message}</h3>;
+    return <UiHttpError error={error} />;
   }
 
   return (

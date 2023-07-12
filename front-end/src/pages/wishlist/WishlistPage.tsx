@@ -8,13 +8,14 @@ import { ItemsPlacement } from "../../../mock-tool/enums/ItemsPlacement";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "../../Api";
 import UiLoadingSpinner from "../../library/UiLoadingSpinner";
+import { UiHttpError } from "../../library/UiHttpError";
 
 export default function WishlistPage() {
   const { data, error, isLoading } = useQuery(["products"], fetchProducts);
 
   if (isLoading) return <UiLoadingSpinner />;
   if (error) {
-    return <h3 className="text-center">An error occurred: ${error.message}</h3>;
+    return <UiHttpError error={error} />;
   }
 
   console.log("isLoading", isLoading, "items", data);

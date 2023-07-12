@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "../../Api";
 import UiLoadingSpinner from "../../library/UiLoadingSpinner";
+import { UiHttpError } from "../../library/UiHttpError";
 
 const StyledWidget = styled(UiWidget)`
   flex-direction: row;
@@ -33,7 +34,7 @@ export default function CartPage() {
 
   if (isLoading) return <UiLoadingSpinner />;
   if (error) {
-    return <h3 className="text-center">An error occurred: ${error.message}</h3>;
+    return <UiHttpError error={error} />;
   }
 
   return (
