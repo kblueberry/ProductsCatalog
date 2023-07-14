@@ -5,12 +5,14 @@ import { ProductItem } from "../../mock-tool/Product";
 type ImageProps = {
   product: ProductItem;
   wishListAction?: boolean;
+  inWishlist?: boolean;
   className?: string;
 };
 
 export default function UiListItemImage({
   product,
   wishListAction = false,
+  inWishlist,
   className = "",
 }: ImageProps) {
   return (

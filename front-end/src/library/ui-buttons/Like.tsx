@@ -1,30 +1,34 @@
 import { ProductItem } from "../../../mock-tool/Product";
-import { useState } from "react";
+import { useCallback } from "react";
 import "./Like.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { ActionTypes, WishlistState } from "../../store/WishlistReducer";
 
 export default function Like({ item }: { item: ProductItem }) {
-  const [inWishList, setInWishList] = useState<boolean>(item.inWishList);
+  const dispatch = useDispatch();
 
-  const addToWishList = () => {
-    item.inWishList = !item.inWishList;
-    console.log("item is updating...", item);
+  const wishlistItems = useSelector<
+    WishlistState,
+    WishlistState["wishlistItems"]
+  >((state) => state.wishlistItems);
 
-    fetch(`http://localhost:3000/products/${item._id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(item),
-    })
-      .then((response) => response.json())
-      .then((likedItem) => {
-        setInWishList(likedItem.inWishList);
-      });
-  };
+  const updateItemWishlistState = useCallback(() => {
+    const type = wishlistItems.includes(item._id)
+      ? ActionTypes.Remove
+      : ActionTypes.Add;
+
+    dispatch({ type, payload: item._id });
+  }, [item, wishlistItems]);
 
   return (
-    <div className="placement" onClick={addToWishList}>
+    <div className="placement" onClick={updateItemWishlistState}>
       <div className="heart">
         <svg
-          className={inWishList ? "added_to_wishlist" : "not_added_to_wishlist"}
+          className={
+            wishlistItems.includes(item._id)
+              ? "added_to_wishlist"
+              : "not_added_to_wishlist"
+          }
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
         >

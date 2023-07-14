@@ -5,31 +5,40 @@ import { UiName } from "../../library/UiSection";
 import AddToCart from "./AddToCart";
 import NoItemsPlaceholder from "../../library/NoItemsPlaceholder";
 import { ItemsPlacement } from "../../../mock-tool/enums/ItemsPlacement";
-import { useQuery } from "@tanstack/react-query";
-import { fetchProducts } from "../../Api";
 import UiLoadingSpinner from "../../library/UiLoadingSpinner";
 import { UiHttpError } from "../../library/UiHttpError";
+import { useSelector } from "react-redux";
+import { WishlistState } from "../../store/WishlistReducer";
+import { useContext } from "react";
+import { ProductsContext } from "../../context/ProductsContext";
 
 export default function WishlistPage() {
-  const { data, error, isLoading } = useQuery(["products"], fetchProducts);
+  const wishlistItems = useSelector<
+    WishlistState,
+    WishlistState["wishlistItems"]
+  >((state) => state.wishlistItems);
+  const products = useContext(ProductsContext);
 
-  if (isLoading) return <UiLoadingSpinner />;
-  if (error) {
-    return <UiHttpError error={error} />;
+  if (products.isLoading) return <UiLoadingSpinner />;
+  if (products.error) {
+    return <UiHttpError error={products.error} />;
   }
 
-  console.log("isLoading", isLoading, "items", data);
   return (
     <div className="container d-flex flex-column justify-content-start align-items-center">
-      {!!data?.filter((item) => item.inWishList).length ? (
+      {!!wishlistItems.length ? (
         <UiList>
-          {data
-            ?.filter((item) => item.inWishList)
+          {products.products
+            .filter((product) => wishlistItems.includes(product._id))
             .map(
               (item, index) =>
                 !item.inCart && (
                   <UiWidget key={index}>
-                    <UiListItemImage product={item} wishListAction={true} />
+                    <UiListItemImage
+                      product={item}
+                      wishListAction={true}
+                      inWishlist={() => wishlistItems.includes(item._id)}
+                    />
                     <UiName item={item} />
                     <AddToCart item={item} />
                   </UiWidget>

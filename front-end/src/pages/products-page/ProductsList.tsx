@@ -6,7 +6,7 @@ import { ActionNames } from "../../../mock-tool/ConstantsConfig";
 import UiListItemImage from "../../library/UiListItemImage";
 import ProductDescription from "./ProductDescription";
 import { useContext } from "react";
-import { ProductsContext } from "../../ProductsContext";
+import { ProductsContext } from "../../context/ProductsContext";
 import { UiHttpError } from "../../library/UiHttpError";
 import UiLoadingSpinner from "../../library/UiLoadingSpinner";
 

@@ -1,5 +1,4 @@
 import "./ProductsPage.scss";
-import { ProductsContextProvider } from "../../../ProductsContext";
 import ProductsList from "../ProductsList";
 
 export default function ProductsPage() {
@@ -9,9 +8,7 @@ export default function ProductsPage() {
         The innovation leader in vinyl floor
       </h5>
       <h1 className="h1 display-5 fs-2">Let's Get Started</h1>
-      <ProductsContextProvider>
-        <ProductsList />
-      </ProductsContextProvider>
+      <ProductsList />
     </div>
   );
 }

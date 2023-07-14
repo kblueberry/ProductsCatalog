@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { ProductItem } from "../mock-tool/Product";
+import { ProductItem } from "../../mock-tool/Product";
 
 type ProductsState = {
   products: Array<ProductItem>;
