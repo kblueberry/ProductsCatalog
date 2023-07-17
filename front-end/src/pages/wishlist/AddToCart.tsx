@@ -21,7 +21,7 @@ export default function AddToCart({ item }: { item: ProductItem }) {
       payload: {
         value: item._id,
         collection: {
-          name: ProductsCollection.Wishlist,
+          name: ProductsCollection.Cart,
           content: cartsItems,
         },
       },
@@ -38,13 +38,16 @@ export default function AddToCart({ item }: { item: ProductItem }) {
       onClick={updateCartState}
     >
       {!cartsItems.includes(item._id) ? (
-        <ShoppingCart />
+        <>
+          <ShoppingCart />
+          {ActionNames.addToCart}
+        </>
       ) : (
-        <RemoveShoppingCart />
+        <>
+          <RemoveShoppingCart />
+          {ActionNames.removeFromCart}
+        </>
       )}
-      {!cartsItems.includes(item._id)
-        ? ActionNames.addToCart
-        : ActionNames.removeFromCart}
     </button>
   );
 }
