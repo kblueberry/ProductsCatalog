@@ -2,14 +2,15 @@ import { ProductItem } from "../../../mock-tool/Product";
 import { useCallback } from "react";
 import "./Like.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { ActionTypes, WishlistState } from "../../store/WishlistReducer";
+import { ProductsState } from "../../store/dto/ProductsState";
+import { ActionTypes, ProductsCollection } from "../../store/dto/StateEnums";
 
 export default function Like({ item }: { item: ProductItem }) {
   const dispatch = useDispatch();
 
   const wishlistItems = useSelector<
-    WishlistState,
-    WishlistState["wishlistItems"]
+    ProductsState,
+    ProductsState["wishlistItems"]
   >((state) => state.wishlistItems);
 
   const updateItemWishlistState = useCallback(() => {
@@ -17,7 +18,16 @@ export default function Like({ item }: { item: ProductItem }) {
       ? ActionTypes.Remove
       : ActionTypes.Add;
 
-    dispatch({ type, payload: item._id });
+    dispatch({
+      type,
+      payload: {
+        value: item._id,
+        collection: {
+          name: ProductsCollection.Wishlist,
+          content: wishlistItems,
+        },
+      },
+    });
   }, [item, wishlistItems]);
 
   return (

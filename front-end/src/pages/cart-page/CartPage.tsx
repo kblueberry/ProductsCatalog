@@ -5,10 +5,12 @@ import NoItemsPlaceholder from "../../library/NoItemsPlaceholder";
 import { ItemsPlacement } from "../../../mock-tool/enums/ItemsPlacement";
 import UiListItemImage from "../../library/UiListItemImage";
 import styled from "styled-components";
-import { useQuery } from "@tanstack/react-query";
-import { fetchProducts } from "../../Api";
 import UiLoadingSpinner from "../../library/UiLoadingSpinner";
 import { UiHttpError } from "../../library/UiHttpError";
+import { useContext } from "react";
+import { ProductsContext } from "../../context/ProductsContext";
+import { useSelector } from "react-redux";
+import { ProductsState } from "../../store/dto/ProductsState";
 
 const StyledWidget = styled(UiWidget)`
   flex-direction: row;
@@ -30,19 +32,22 @@ const StyledSpan = styled.span`
 `;
 
 export default function CartPage() {
-  const { data, error, isLoading } = useQuery(["products"], fetchProducts);
+  const products = useContext(ProductsContext);
+  const cartItems = useSelector<ProductsState, ProductsState["cartItems"]>(
+    (state) => state.cartItems
+  );
 
-  if (isLoading) return <UiLoadingSpinner />;
-  if (error) {
-    return <UiHttpError error={error} />;
+  if (products.isLoading) return <UiLoadingSpinner />;
+  if (products.error) {
+    return <UiHttpError error={products.error} />;
   }
 
   return (
     <div className="container d-flex flex-column justify-content-start align-items-center">
-      {!!data?.filter((item) => item.inCart).length ? (
+      {!!cartItems.length ? (
         <StyledList>
-          {data
-            .filter((item) => item.inCart)
+          {products.products
+            .filter((item) => cartItems.includes(item._id))
             .map((cartItem) => (
               <StyledWidget key={cartItem._id}>
                 <StyledImage product={cartItem} />

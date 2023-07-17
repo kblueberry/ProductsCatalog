@@ -12,7 +12,6 @@ type ImageProps = {
 export default function UiListItemImage({
   product,
   wishListAction = false,
-  inWishlist,
   className = "",
 }: ImageProps) {
   return (

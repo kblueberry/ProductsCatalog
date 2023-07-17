@@ -8,14 +8,14 @@ import { ItemsPlacement } from "../../../mock-tool/enums/ItemsPlacement";
 import UiLoadingSpinner from "../../library/UiLoadingSpinner";
 import { UiHttpError } from "../../library/UiHttpError";
 import { useSelector } from "react-redux";
-import { WishlistState } from "../../store/WishlistReducer";
 import { useContext } from "react";
 import { ProductsContext } from "../../context/ProductsContext";
+import { ProductsState } from "../../store/dto/ProductsState";
 
 export default function WishlistPage() {
   const wishlistItems = useSelector<
-    WishlistState,
-    WishlistState["wishlistItems"]
+    ProductsState,
+    ProductsState["wishlistItems"]
   >((state) => state.wishlistItems);
   const products = useContext(ProductsContext);
 
@@ -34,11 +34,7 @@ export default function WishlistPage() {
               (item, index) =>
                 !item.inCart && (
                   <UiWidget key={index}>
-                    <UiListItemImage
-                      product={item}
-                      wishListAction={true}
-                      inWishlist={() => wishlistItems.includes(item._id)}
-                    />
+                    <UiListItemImage product={item} wishListAction={true} />
                     <UiName item={item} />
                     <AddToCart item={item} />
                   </UiWidget>
