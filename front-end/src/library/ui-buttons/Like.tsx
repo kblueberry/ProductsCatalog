@@ -3,20 +3,18 @@ import { useCallback } from "react";
 import "./Like.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductsState } from "../../store/dto/ProductsState";
-import { ActionTypes, ProductsCollection } from "../../store/dto/StateEnums";
+import { actionType } from "../../store/Helper";
+import { ProductsCollection } from "../../store/dto/StateEnums";
 
 export default function Like({ item }: { item: ProductItem }) {
   const dispatch = useDispatch();
-
   const wishlistItems = useSelector<
     ProductsState,
     ProductsState["wishlistItems"]
   >((state) => state.wishlistItems);
 
   const updateItemWishlistState = useCallback(() => {
-    const type = wishlistItems.includes(item._id)
-      ? ActionTypes.Remove
-      : ActionTypes.Add;
+    const type = actionType(wishlistItems, item._id);
 
     dispatch({
       type,

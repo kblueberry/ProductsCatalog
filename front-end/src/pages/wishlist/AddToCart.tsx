@@ -4,7 +4,8 @@ import { RemoveShoppingCart, ShoppingCart } from "@mui/icons-material";
 import { ProductItem } from "../../../mock-tool/Product";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductsState } from "../../store/dto/ProductsState";
-import { ActionTypes, ProductsCollection } from "../../store/dto/StateEnums";
+import { actionType } from "../../store/Helper";
+import { ProductsCollection } from "../../store/dto/StateEnums";
 
 export default function AddToCart({ item }: { item: ProductItem }) {
   const dispatch = useDispatch();
@@ -13,16 +14,14 @@ export default function AddToCart({ item }: { item: ProductItem }) {
   );
 
   const updateCartState = useCallback(() => {
-    const type = cartsItems.includes(item._id)
-      ? ActionTypes.Remove
-      : ActionTypes.Add;
+    const type = actionType(cartsItems, item._id);
 
     dispatch({
       type,
       payload: {
         value: item._id,
         collection: {
-          name: ProductsCollection.Cart,
+          name: ProductsCollection.Wishlist,
           content: cartsItems,
         },
       },
