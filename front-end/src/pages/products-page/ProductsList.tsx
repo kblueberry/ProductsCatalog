@@ -22,7 +22,7 @@ export default function ProductsList() {
 
   return (
     <UiList>
-      {data.products.map((product) => (
+      {data.products.data.map((product) => (
         <UiWidget key={product.productName}>
           <div className="link_to_details">
             <UILink
