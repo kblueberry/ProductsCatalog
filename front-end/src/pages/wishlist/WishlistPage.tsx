@@ -28,7 +28,7 @@ export default function WishlistPage() {
     <div className="container d-flex flex-column justify-content-start align-items-center">
       {!!wishlistItems.length ? (
         <UiList>
-          {products.products
+          {products.products.data
             .filter((product) => wishlistItems.includes(product._id))
             .map(
               (item, index) =>
